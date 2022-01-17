@@ -1,10 +1,6 @@
-from cProfile import label
-from mmap import mmap
 import tkinter as tk
 from tkinter import LEFT, ttk
 from tkinter import font, colorchooser, filedialog, messagebox
-import os
-from turtle import color, width
 
 main_application = tk.Tk()
 main_application.geometry("960x540")
@@ -71,10 +67,32 @@ for i in color_dict:
     count =+ 1
 
 
+# tool bar
+
+tool_bar_label = ttk.Label(main_application)
+tool_bar_label.pack(side = tk.TOP, fill = tk.X)
+
+
+# font box
+
+font_tuple = tk.font.families()
+font_family = tk.StringVar
+font_box = ttk.Combobox(tool_bar_label, width = 30, textvariable= font_family, state= 'readonly')
+font_box["values"] = font_tuple
+font_box.current(font_tuple.index("Times New Roman"))
+font_box.grid(row= 0, column= 0, padx = 5)
+
+
+# size box
+
+size_variables = tk.IntVar()
+font_size = ttk.Combobox(tool_bar_label, width = 20, textvariable= size_variables, state= 'readonly')
+font_size["values"] = tuple(range(8,100,2))
+font_size.current(14)
+font_size.grid(row= 0, column= 0, padx = 5)
+
 
 
 main_application.config(menu= main_menu)
-
-
 
 main_application.mainloop()
